@@ -20,8 +20,6 @@ ngOnInit(): void {
 }
 
 async login(){
-
-
 try {
 let resp = await this.loginWithUsernameAndPassword(this.username, this.password)
   // TODO: Redirect
