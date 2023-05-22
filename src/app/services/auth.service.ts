@@ -15,8 +15,8 @@ export class AuthService {
   public loginWithUsernameAndPassword (username: string, password: string) {
   const url= environment.baseUrl + "/login/";
   const body = {
-    "username": this.username,
-    "password": this.password
+    "username": username,
+    "password": password
   }
     return lastValueFrom(this.http.post(url,body));
 }

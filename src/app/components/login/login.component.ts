@@ -1,4 +1,6 @@
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -11,7 +13,8 @@ export class LoginComponent implements OnInit {
 username: string='';
 password: string = '';
 
-constructor(private as:AuthService) {
+
+constructor(private as:AuthService, private router: Router) {
   
 }
 ngOnInit(): void {
@@ -19,12 +22,15 @@ ngOnInit(): void {
 }
 
 async login(){
-try {
-let resp = await this.as.loginWithUsernameAndPassword(this.username, this.password)
+  try{
+let resp:any = await this.as.loginWithUsernameAndPassword(this.username, this.password) 
 console.log (resp);
-  // TODO: Redirect
-} catch(e) {
-  // Show error message
+//console.log (resp[token]);
+localStorage.setItem('token', resp['token']);
+this.router.navigateByUrl('/todos')
+} 
+catch(e) {
+alert('Login fehlgeschlagen')
 console.error(e);
 }
 }
